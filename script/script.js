@@ -1,21 +1,5 @@
-/* MAIN */
+/* MAIN CODE */
 const arrLibrary = [];
-
-function showBooks(bookList) {
-    const table = document.querySelector('table');
-    const tbody = table.querySelector('tbody');
-
-    bookList.forEach(book => {
-        const tr = document.createElement('tr');
-        
-        for (const item in book) {
-            const td = document.createElement('td');
-            td.textContent = book[item];
-            tr.appendChild(td);
-        }
-        tbody.appendChild(tr);
-    });
-}
 
 function addBookToLibrary(book) {
     arrLibrary.push(book);
@@ -32,6 +16,22 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+/* DOM */
+function showBooks(bookList) {
+    const table = document.querySelector('table');
+    const tbody = table.querySelector('tbody');
+
+    bookList.forEach(book => {
+        const tr = document.createElement('tr');
+        
+        for (const item in book) {
+            const td = document.createElement('td');
+            td.textContent = book[item];
+            tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+    });
+}
 
 
 // Manually Added Books
@@ -42,6 +42,3 @@ addBookToLibrary(book);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
 showBooks(arrLibrary);
-
-
-/* DISPLAY */
