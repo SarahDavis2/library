@@ -1,3 +1,4 @@
+/* MAIN */
 const arrLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -25,3 +26,5 @@ Book.prototype.addBookToLibrary = function () {
 const book = new Book("The Hobbit", "J.K.K Tolkien", 295, "not read yet");
 const book2 = new Book("The Hobbit2", "J.K.K Tolkien", 295, "not read yet");
 const book3 = new Book("The Hobbit3", "J.K.K Tolkien", 295, "not read yet");
+
+/* DISPLAY */
