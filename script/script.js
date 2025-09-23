@@ -33,7 +33,6 @@ function showBooks(bookList) {
     });
 }
 
-
 // Manually Added Books
 const book = new Book("The Hobbit", "J.K.K Tolkien", 295, "not read yet");
 const book2 = new Book("The Hobbit2", "J.K.K Tolkien", 295, "not read yet");
