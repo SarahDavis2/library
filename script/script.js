@@ -9,7 +9,7 @@ function Book(title, author, pages, read) {
     if (!new.target) {
         throw Error("ERROR! Use the new operator.");
     }
-    this.id = crypto.randomUUID(); // Working?
+    this.id = crypto.randomUUID();
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -34,10 +34,12 @@ function showBooks(bookList) {
 }
 
 /* DIALOG */
-const showDialog = document.querySelector('.showDialog');
+const showDialogBtn = document.querySelector('.showDialog');
 const dialog = document.querySelector('dialog');
+const addBookBtn = document.querySelector('form button');
+// ^ ADD FUNCTIONALITY TO THIS BUTTON TO ADD BOOKS
 
-showDialog.addEventListener("click", () => {
+showDialogBtn.addEventListener("click", () => {
     dialog.showModal();
 });
 
