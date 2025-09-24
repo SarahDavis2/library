@@ -1,0 +1,31 @@
+* {
+    /* border: 2px solid red; */
+}
+
+:root {
+    height: 100%;
+
+    /* VARIABLES */
+    --bg-clr: #f4f4f4;
+    --main-clr: #e4e4e4;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    z-index: 0;
+
+    background-color: var(--main-clr);
+}
+
+main {
+    background-color: var(--bg-clr);
+    flex: 1;
+}
