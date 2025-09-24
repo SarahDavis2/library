@@ -4,6 +4,7 @@
 
 :root {
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 
     /* VARIABLES */
     --bg-clr: #f4f4f4;
@@ -16,13 +17,22 @@ body {
     min-height: 100%;
 }
 
+/* HEADER */
 header {
     display: flex;
     justify-content: space-between;
-    padding: 1.5rem;
+    padding: 2rem;
     z-index: 0;
 
     background-color: var(--main-clr);
+}
+
+header h1 {
+    font-size: 3rem;
+}
+
+header button {
+    width: 128px;
 }
 
 main {
@@ -35,8 +45,19 @@ main {
     align-content: center;
 }
 
+/* TABLE */
 table {
     flex: 0;
+}
+
+caption, thead {
+    font-weight: bold;
+}
+
+caption {
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    font-size: 2rem;
 }
 
 /* DIALOG */
