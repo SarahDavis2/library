@@ -26,6 +26,15 @@ header {
 }
 
 main {
-    background-color: var(--bg-clr);
     flex: 1;
+    padding: 2rem;
+    background-color: var(--bg-clr);
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+table {
+    flex: 0;
 }
