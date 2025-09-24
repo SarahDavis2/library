@@ -38,3 +38,41 @@ main {
 table {
     flex: 0;
 }
+
+/* DIALOG */
+dialog {
+    justify-self: center;
+    padding: 1.5rem;
+}
+
+dialog h1 {
+    margin-bottom: 1rem;
+}
+
+form {
+    display: grid;
+    grid-template: repeat(2, 1fr) / [col-start] repeat(3, 1fr) [col-end];
+    gap: 1rem;
+
+    align-items: center;
+}
+
+.read {
+    grid-column: col-start / span 2;
+}
+
+/* FORM INPUTS */
+form div {
+    display: flex;
+    gap: 4px;
+}
+
+form input, form textarea {
+    flex: 1;
+    padding: 4px;
+}
+
+form button {
+    justify-self: end;
+    width: 128px;
+}
