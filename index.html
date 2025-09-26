@@ -24,6 +24,7 @@
                     <td>Title</td>
                     <td>Author</td>
                     <td>Pages</td>
+                    <td>Notes</td>
                     <td>Read</td>
                 </tr>
             </thead>
@@ -45,11 +46,17 @@
                 <label for="pages">Pages:</label>
                 <input type="number" name="pages" id="pages">
             </div>
-            <div class="read">
-                <label for="read">Read:</label>
-                <textarea rows="3" cols="55" name="read" id="read"></textarea>
+            <div class="notes">
+                <label for="notes">Notes:</label>
+                <textarea rows="3" cols="55" name="notes" id="notes"></textarea>
             </div>
-            <button type="submit" formmethod="dialog">Add Book</button>
+            <div class="bottom-right">
+                <div class="read">
+                    <label for="read">Read</label>
+                    <input type="checkbox" name="read" id="read">
+                </div>
+                <button type="submit" formmethod="dialog">Add Book</button>
+            </div>
         </form>
     </dialog>
 </body>

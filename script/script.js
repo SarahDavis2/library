@@ -5,7 +5,7 @@ function addBookToLibrary(book) {
     arrLibrary.push(book);
 }
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, notes, read) {
     if (!new.target) {
         throw Error("ERROR! Use the new operator.");
     }
@@ -13,6 +13,7 @@ function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.notes = notes;
     this.read = read;
 }
 
@@ -44,9 +45,9 @@ showDialogBtn.addEventListener("click", () => {
 });
 
 // Manually Added Books
-const book = new Book("The Hobbit", "J.K.K Tolkien", 295, "not read yet");
-const book2 = new Book("The Hobbit2", "J.K.K Tolkien", 295, "not read yet");
-const book3 = new Book("The Hobbit3", "J.K.K Tolkien", 295, "not read yet");
+const book = new Book("The Hobbit", "J.K.K Tolkien", 295, "notes", true);
+const book2 = new Book("The Hobbit2", "J.K.K Tolkien", 295, "notes", true);
+const book3 = new Book("The Hobbit3", "J.K.K Tolkien", 295, "notes", true);
 addBookToLibrary(book);
 addBookToLibrary(book2);
 addBookToLibrary(book3);

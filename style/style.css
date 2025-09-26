@@ -90,7 +90,7 @@ form {
     align-items: center;
 }
 
-.read {
+.notes {
     grid-column: col-start / span 2;
 }
 
@@ -103,6 +103,12 @@ form div {
 form input, form textarea {
     flex: 1;
     padding: 4px;
+}
+
+.bottom-right {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
 }
 
 form button {
