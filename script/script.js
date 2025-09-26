@@ -1,5 +1,5 @@
 /* MAIN CODE */
-const arrLibrary = [];
+let arrLibrary = [];
 
 function addBookToLibrary(book) {
     arrLibrary.push(book);
@@ -18,13 +18,13 @@ function Book(title, author, pages, notes, read) {
 }
 
 /* DOM */
-function updateTable(bookList) {
+function updateTable() {
     const table = document.querySelector('table');
     const tbody = table.querySelector('tbody');
 
     // prevent duplicate books by clearing
     clearBooks(tbody);
-    showBooks(tbody, bookList);
+    showBooks(tbody, arrLibrary);
 
 }
 
@@ -35,13 +35,54 @@ function clearBooks(tbody) {
 function showBooks(tbody, bookList) {
     bookList.forEach(book => {
         const tr = document.createElement('tr');        
-        for (const item in book) {
-            const td = document.createElement('td');
-            td.textContent = book[item];
-            tr.appendChild(td);
-        }
+        addBookData(tr, book);
+        addActionsBtns(tr);
         tbody.appendChild(tr);
     });
+}
+
+function addBookData(tr, book) {
+    for (const item in book) {
+        const td = document.createElement('td');
+        if (item === 'id') {
+            tr.setAttribute('data-id', book[item]);
+        }
+        td.textContent = book[item];
+        tr.appendChild(td);
+    }
+}
+
+function addActionsBtns(tr) {
+    const arrBtns = ["Remove", "Toggle Read"];
+
+    for (const arrBtn in arrBtns) {
+        const td = document.createElement('td');
+        const btn = document.createElement('button');
+
+        btn.textContent = arrBtns[arrBtn];
+        btn.setAttribute('type', 'button');
+
+        btn.addEventListener("click", (e) => {
+            switch (e.target.textContent) {
+                case "Remove":
+                    removeBook(tr);
+                    break;
+                case "Toggle Read":
+                    toggleRead();
+            }
+        });
+        tr.appendChild(td);
+        td.appendChild(btn);
+    }
+}
+
+function removeBook(tr) {
+    arrLibrary = arrLibrary.filter(book => book.id !== tr.getAttribute('data-id'));
+    updateTable();
+}
+
+function toggleRead() {
+
 }
 
 /* DIALOG */
@@ -63,7 +104,7 @@ addBookBtn.addEventListener("click", (e) => {
     }
     const book = new Book(title.value, author.value, pages.value, notes.value, isRead);
     addBookToLibrary(book);
-    updateTable(arrLibrary);
+    updateTable();
 });
 
 
@@ -74,4 +115,4 @@ const book3 = new Book("The Hobbit3", "J.K.K Tolkien", 295, "notes", "Read");
 addBookToLibrary(book);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
-updateTable(arrLibrary);
+updateTable();
