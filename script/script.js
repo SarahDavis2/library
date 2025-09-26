@@ -18,13 +18,13 @@ function Book(title, author, pages, notes, read) {
 }
 
 /* DOM */
-function showBooks(bookList) {
+function updateTable(bookList) {
     const table = document.querySelector('table');
     const tbody = table.querySelector('tbody');
 
     // prevent duplicate books by clearing
     clearBooks(tbody);
-    addBooks(tbody, bookList);
+    showBooks(tbody, bookList);
 
 }
 
@@ -32,7 +32,7 @@ function clearBooks(tbody) {
     tbody.innerHTML = '';
 }
 
-function addBooks(tbody, bookList) {
+function showBooks(tbody, bookList) {
     bookList.forEach(book => {
         const tr = document.createElement('tr');        
         for (const item in book) {
@@ -63,7 +63,7 @@ addBookBtn.addEventListener("click", (e) => {
     }
     const book = new Book(title.value, author.value, pages.value, notes.value, isRead);
     addBookToLibrary(book);
-    showBooks(arrLibrary);
+    updateTable(arrLibrary);
 });
 
 
@@ -74,4 +74,4 @@ const book3 = new Book("The Hobbit3", "J.K.K Tolkien", 295, "notes", "Read");
 addBookToLibrary(book);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
-showBooks(arrLibrary);
+updateTable(arrLibrary);
