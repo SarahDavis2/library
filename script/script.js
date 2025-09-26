@@ -17,6 +17,15 @@ function Book(title, author, pages, notes, read) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function() {
+    if (this.read === "Read") {
+        this.read = "Unread";
+    } else {
+        this.read = "Read";
+    }
+    updateTable();
+}
+
 /* DOM */
 function updateTable() {
     const table = document.querySelector('table');
@@ -42,13 +51,24 @@ function showBooks(tbody, bookList) {
 }
 
 function addBookData(tr, book) {
+    const skipItem = ["id", "toggleRead"];
+    let isSkip = false;
+
     for (const item in book) {
-        const td = document.createElement('td');
+        isSkip = false;
+        if (skipItem.includes(item)) {
+            isSkip = true;
+        }
+
         if (item === 'id') {
             tr.setAttribute('data-id', book[item]);
         }
-        td.textContent = book[item];
-        tr.appendChild(td);
+
+        if (!isSkip) {
+            const td = document.createElement('td');
+            td.textContent = book[item];
+            tr.appendChild(td);
+        }
     }
 }
 
@@ -68,7 +88,7 @@ function addActionsBtns(tr) {
                     removeBook(tr);
                     break;
                 case "Toggle Read":
-                    toggleRead();
+                    toggleRead(tr);
             }
         });
         tr.appendChild(td);
@@ -81,8 +101,9 @@ function removeBook(tr) {
     updateTable();
 }
 
-function toggleRead() {
-
+function toggleRead(tr) {
+    const book = arrLibrary.find(book => book.id === tr.getAttribute('data-id'));
+    book.toggleRead();
 }
 
 /* DIALOG */
