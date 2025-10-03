@@ -5,26 +5,26 @@ function addBookToLibrary(book) {
     arrLibrary.push(book);
 }
 
-function Book(title, author, pages, notes, read) {
-    if (!new.target) {
-        throw Error("ERROR! Use the new operator.");
+class Book {
+    constructor (title, author, pages, notes, read) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.notes = notes;
+        this.read = read;
     }
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.notes = notes;
-    this.read = read;
+    toggleRead() {
+        if (this.read === "Read") {
+            this.read = "Unread";
+        } else {
+            this.read = "Read";
+        }
+        updateTable();
+    }
 }
 
-Book.prototype.toggleRead = function() {
-    if (this.read === "Read") {
-        this.read = "Unread";
-    } else {
-        this.read = "Read";
-    }
-    updateTable();
-}
+
 
 /* DOM */
 function updateTable() {
