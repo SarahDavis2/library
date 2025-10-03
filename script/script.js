@@ -1,109 +1,111 @@
 /* MAIN CODE */
-let arrLibrary = [];
+class Library {
+    static arrLibrary = [];
+    static addBookToLibrary(book) {
+        this.arrLibrary.push(book);
+    } 
 
-function addBookToLibrary(book) {
-    arrLibrary.push(book);
-}
-
-function Book(title, author, pages, notes, read) {
-    if (!new.target) {
-        throw Error("ERROR! Use the new operator.");
-    }
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.notes = notes;
-    this.read = read;
-}
-
-Book.prototype.toggleRead = function() {
-    if (this.read === "Read") {
-        this.read = "Unread";
-    } else {
-        this.read = "Read";
-    }
-    updateTable();
-}
-
-/* DOM */
-function updateTable() {
-    const table = document.querySelector('table');
-    const tbody = table.querySelector('tbody');
-
-    // prevent duplicate books by clearing
-    clearBooks(tbody);
-    showBooks(tbody, arrLibrary);
-
-}
-
-function clearBooks(tbody) {
-    tbody.innerHTML = '';
-}
-
-function showBooks(tbody, bookList) {
-    bookList.forEach(book => {
-        const tr = document.createElement('tr');        
-        addBookData(tr, book);
-        addActionsBtns(tr);
-        tbody.appendChild(tr);
-    });
-}
-
-function addBookData(tr, book) {
-    const skipItem = ["id", "toggleRead"];
-    let isSkip = false;
-
-    for (const item in book) {
-        isSkip = false;
-        if (skipItem.includes(item)) {
-            isSkip = true;
+    constructor(title, author, pages, notes, read) {
+        if (!new.target) {
+            throw Error("ERROR! Use the new operator.");
         }
-
-        if (item === 'id') {
-            tr.setAttribute('data-id', book[item]);
-        }
-
-        if (!isSkip) {
-            const td = document.createElement('td');
-            td.textContent = book[item];
-            tr.appendChild(td);
-        }
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.notes = notes;
+        this.read = read;
     }
-}
 
-function addActionsBtns(tr) {
-    const arrBtns = ["Remove", "Toggle Read"];
+    toggleRead() {
+        if (this.read === "Read") {
+            this.read = "Unread";
+        } else {
+            this.read = "Read";
+        }
+        updateTable();
+    }
 
-    for (const arrBtn in arrBtns) {
-        const td = document.createElement('td');
-        const btn = document.createElement('button');
+    /* DOM */
+    test() {
+        console.log("yes")
+        this.test2();
+    }
+    test2() {
+        console.log("yes2")
+    }
 
-        btn.textContent = arrBtns[arrBtn];
-        btn.setAttribute('type', 'button');
+    static updateTable(instance) {
+        const table = document.querySelector('table');
+        const tbody = table.querySelector('tbody');
 
-        btn.addEventListener("click", (e) => {
-            switch (e.target.textContent) {
-                case "Remove":
-                    removeBook(tr);
-                    break;
-                case "Toggle Read":
-                    toggleRead(tr);
-            }
+        // prevent duplicate books by clearing
+        instance.clearBooks(tbody);
+        instance.showBooks(tbody, Library.arrLibrary);
+    }
+    clearBooks(tbody) {
+        tbody.innerHTML = '';
+    }
+    showBooks(tbody, bookList) {
+        bookList.forEach(book => {
+            const tr = document.createElement('tr');        
+            this.addBookData(tr, book);
+            this.addActionsBtns(tr);
+            tbody.appendChild(tr);
         });
-        tr.appendChild(td);
-        td.appendChild(btn);
     }
-}
+    addBookData(tr, book) {
+        const skipItem = ["id", "toggleRead"];
+        let isSkip = false;
 
-function removeBook(tr) {
-    arrLibrary = arrLibrary.filter(book => book.id !== tr.getAttribute('data-id'));
-    updateTable();
-}
+        for (const item in book) {
+            isSkip = false;
+            if (skipItem.includes(item)) {
+                isSkip = true;
+            }
 
-function toggleRead(tr) {
-    const book = arrLibrary.find(book => book.id === tr.getAttribute('data-id'));
-    book.toggleRead();
+            if (item === 'id') {
+                tr.setAttribute('data-id', book[item]);
+            }
+
+            if (!isSkip) {
+                const td = document.createElement('td');
+                td.textContent = book[item];
+                tr.appendChild(td);
+            }
+        }
+    }
+    addActionsBtns(tr) {
+        const arrBtns = ["Remove", "Toggle Read"];
+
+        for (const arrBtn in arrBtns) {
+            const td = document.createElement('td');
+            const btn = document.createElement('button');
+
+            btn.textContent = arrBtns[arrBtn];
+            btn.setAttribute('type', 'button');
+
+            btn.addEventListener("click", (e) => {
+                switch (e.target.textContent) {
+                    case "Remove":
+                        this.removeBook(tr);
+                        break;
+                    case "Toggle Read":
+                        this.toggleRead(tr);
+                }
+            });
+            tr.appendChild(td);
+            td.appendChild(btn);
+        }
+    }
+    removeBook(tr) {
+        Library.arrLibrary = Library.arrLibrary.filter(book => book.id !== tr.getAttribute('data-id'));
+        Library.updateTable();
+    }
+    toggleRead(tr) {
+        const book = this.arrLibrary.find(book => book.id === tr.getAttribute('data-id'));
+        book.toggleRead();
+    }
 }
 
 /* DIALOG */
@@ -124,16 +126,17 @@ addBookBtn.addEventListener("click", (e) => {
         isRead = "Read";
     }
     const book = new Book(title.value, author.value, pages.value, notes.value, isRead);
-    addBookToLibrary(book);
-    updateTable();
+    Library.addBookToLibrary(book);
+    Library.updateTable();
 });
 
 
 // Manually Added Books
-const book = new Book("The Hobbit", "J.K.K Tolkien", 295, "notes", "Read");
-const book2 = new Book("The Hobbit2", "J.K.K Tolkien", 295, "notes", "Read");
-const book3 = new Book("The Hobbit3", "J.K.K Tolkien", 295, "notes", "Read");
-addBookToLibrary(book);
-addBookToLibrary(book2);
-addBookToLibrary(book3);
-updateTable();
+const book = new Library("The Hobbit", "J.K.K Tolkien", 295, "notes", "Read");
+const book2 = new Library("The Hobbit2", "J.K.K Tolkien", 295, "notes", "Read");
+const book3 = new Library("The Hobbit3", "J.K.K Tolkien", 295, "notes", "Read");
+Library.addBookToLibrary(book);
+Library.addBookToLibrary(book2);
+Library.addBookToLibrary(book3);
+book.test();
+Library.updateTable(book);
